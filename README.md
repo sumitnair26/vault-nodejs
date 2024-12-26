@@ -37,3 +37,27 @@ Enter name as readonly-kv-backend, and enter following content for Policy.
 Following the principle of least privilege, this policy will only give read access to secrets at the specific path.
 
 Hit Create Policy to save it.
+
+## Create AppRole for Node.js Application
+
+We’re going to switch gears and use Vault CLI to finish setting up our demo. There are two ways to access Vault CLI; you can download the Vault binary, or you can exec into Vault container and access the CLI. For this demo we’ll use the latter.
+
+`docker exec -it vault /bin/sh`
+
+We’ll then set up the VAULT_ADDR and VAULT_TOKEN environment variables.
+
+`export VAULT_ADDR=http://localhost:8200 export VAULT_TOKEN=<ROOT TOKEN>`
+
+
+Now let’s create an AppRole and attach our policy to this role. 
+
+`vault write auth/approle/role/node-app-role \
+    token_ttl=1h \
+    token_max_ttl=4h \
+    token_policies=readonly-kv-backend`
+
+You should be able to see it being created successfully.
+
+`Success! Data written to: auth/approle/role/node-app-role`
+
+Each AppRole has a RoleID and SecretID, much like a username and password. The application can exchange this RoleID and SecretID for a token, which can then be used in subsequent requests.
