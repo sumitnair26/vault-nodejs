@@ -83,4 +83,6 @@ For testing in node JS application add Secrets
 `vault kv put secret/mysql/webapp db_name="users" username="admin" password="passw0rd"`
 
 # Here we have finished all setup steps now we can proceed with node JS Code
-`node index.js`
+`
+npm install
+node index.js`
