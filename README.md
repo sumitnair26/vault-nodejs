@@ -61,3 +61,17 @@ You should be able to see it being created successfully.
 `Success! Data written to: auth/approle/role/node-app-role`
 
 Each AppRole has a RoleID and SecretID, much like a username and password. The application can exchange this RoleID and SecretID for a token, which can then be used in subsequent requests.
+
+## Get RoleID and SecretID
+
+Now we’ll fetch the RoleID pertaining to the node-app-role via the following command:
+
+`vault read auth/approle/role/node-app-role/role-id`
+
+Next we’ll fetch the `SecretID`:
+
+vault write -f auth/approle/role/node-app-role/secret-id
+
+Make sure you store these values somewhere safe, as we’ll use them in our Node.js application.
+
+Response Wraping : https://developer.hashicorp.com/vault/tutorials/auth-methods/approle#response-wrap-the-secretid
