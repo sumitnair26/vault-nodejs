@@ -75,3 +75,11 @@ vault write -f auth/approle/role/node-app-role/secret-id
 Make sure you store these values somewhere safe, as we’ll use them in our Node.js application.
 
 Response Wraping : https://developer.hashicorp.com/vault/tutorials/auth-methods/approle#response-wrap-the-secretid
+
+## Create a Secret
+
+For testing in node JS application add Secrets 
+
+`vault kv put secret/mysql/webapp db_name="users" username="admin" password="passw0rd"`
+
+# Here we have finished all setup steps now we can proceed 
